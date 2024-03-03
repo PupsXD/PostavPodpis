@@ -15,15 +15,28 @@ namespace Currency_and_Votes
         [SerializeField] private Slider wealthSlider;
         [SerializeField] private Slider peasantPopularitySlider;
 
-        private void Start()
+        private void Awake()
         {
             Ivotable = new BaseVoter();
-            _politic = FindObjectOfType<RandomizeCharachter>().GetComponent<Politic>();
             
-            intellegenceSlider.value = _politic.intelegence;
-            aggrecivenessSlider.value = _politic.agressiveness;
-            wealthSlider.value = _politic.wealthiness;
-            peasantPopularitySlider.value = _politic.goodForPeasants; //rename for peasantPopularity in future
+        }
+
+        private void Start()
+        {
+            _politic = FindObjectOfType<RandomizeCharachter>().GetComponent<Politic>();
+            if (_politic != null)
+            {
+                intellegenceSlider.value = _politic.intelegence;
+                aggrecivenessSlider.value = _politic.agressiveness;
+                wealthSlider.value = _politic.wealthiness;
+                peasantPopularitySlider.value = _politic.goodForPeasants; //rename for peasantPopularity in future
+            }
+            else
+            {
+                Debug.Log("Suck Cock");
+            }
+            
+            
         }
 
         public void AddVotes()
